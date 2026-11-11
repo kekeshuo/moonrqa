@@ -110,6 +110,7 @@ pub fn Recurrence::rows(Self) -> Array[Array[Int32]]
 pub fn Recurrence::shape(Self) -> (Int32, Int32)
 pub fn Recurrence::to_json(Self) -> Json
 pub fn Recurrence::to_repr(Self) -> @debug.Repr
+pub fn Recurrence::to_svg(Self, Int32, String, Int32) -> Result[String, RqaError]
 pub fn Recurrence::transpose(Self) -> Self
 pub fn Recurrence::vertical_histogram(Self) -> Array[Int32]
 
