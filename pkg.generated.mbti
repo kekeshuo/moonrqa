@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn embed(Array[Double], Int32, Int32) -> Result[Trajectory, RqaError]
+
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 
 // Errors
@@ -40,6 +42,8 @@ pub fn Trajectory::len(Self) -> Int32
 pub fn Trajectory::not_equal(Self, Self) -> Bool
 pub fn Trajectory::point(Self, Int32) -> Result[Array[Double], RqaError]
 pub fn Trajectory::rows(Self) -> Array[Array[Double]]
+pub fn Trajectory::slice(Self, Int32, Int32) -> Result[Self, RqaError]
+pub fn Trajectory::standardize(Self) -> Result[Self, RqaError]
 pub fn Trajectory::to_repr(Self) -> @debug.Repr
 
 // Type aliases
