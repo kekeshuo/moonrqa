@@ -7,16 +7,27 @@ fn point_distance(
   metric : Metric,
 ) -> Double {
   let mut total = 0.0
+  let mut scale = 0.0
   for k in 0..<a.dimensions {
     let delta = (a.values[i * a.dimensions + k] - b.values[j * b.dimensions + k]).abs()
     match metric {
       Chebyshev => total = total.max(delta)
       Manhattan => total += delta
-      Euclidean => total += delta * delta
+      Euclidean =>
+        if delta > 0.0 {
+          if delta > scale {
+            let ratio = scale / delta
+            total = 1.0 + total * ratio * ratio
+            scale = delta
+          } else {
+            let ratio = delta / scale
+            total += ratio * ratio
+          }
+        }
     }
   }
   match metric {
-    Euclidean => total.sqrt()
+    Euclidean => scale * total.sqrt()
     _ => total
   }
 }

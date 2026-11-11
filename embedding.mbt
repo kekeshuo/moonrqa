@@ -62,17 +62,23 @@ pub fn Trajectory::standardize(
     for i in 0..<self.samples {
       mean += self.values[i * self.dimensions + k] / self.samples.to_double()
     }
-    let mut variance = 0.0
+    let mut scale = 0.0
     for i in 0..<self.samples {
-      let x = self.values[i * self.dimensions + k] - mean
-      variance += x * x / self.samples.to_double()
+      scale = scale.max((self.values[i * self.dimensions + k] - mean).abs())
+    }
+    let mut variance = 0.0
+    if scale > 0.0 {
+      for i in 0..<self.samples {
+        let x = (self.values[i * self.dimensions + k] - mean) / scale
+        variance += x * x / self.samples.to_double()
+      }
     }
     let sd = variance.sqrt()
     for i in 0..<self.samples {
-      output[i * self.dimensions + k] = if sd == 0.0 {
+      output[i * self.dimensions + k] = if scale == 0.0 {
         0.0
       } else {
-        (self.values[i * self.dimensions + k] - mean) / sd
+        (self.values[i * self.dimensions + k] - mean) / scale / sd
       }
     }
   }
