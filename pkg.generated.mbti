@@ -160,6 +160,7 @@ pub fn RqaSummary::equal(Self, Self) -> Bool
 pub fn RqaSummary::not_equal(Self, Self) -> Bool
 pub fn RqaSummary::to_json(Self) -> Json
 pub fn RqaSummary::to_repr(Self) -> @debug.Repr
+pub fn RqaSummary::validate(Self) -> Result[Unit, RqaError]
 
 pub(all) struct ThresholdSummary {
   threshold : Double

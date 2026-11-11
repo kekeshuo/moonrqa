@@ -61,7 +61,19 @@ pub fn Recurrence::lag_profile(
 pub fn best_lag(profile : Array[LagPoint]) -> Int32? {
   let mut best : LagPoint? = None
   for p in profile {
+    if p.lag < -4096 ||
+      p.lag > 4096 ||
+      p.eligible < 1 ||
+      p.eligible > 4096 ||
+      p.recurrent < 0 ||
+      p.recurrent > p.eligible {
+      continue
+    }
     guard p.rate is Some(rate) else { continue }
+    if !finite(rate) ||
+      (rate - p.recurrent.to_double() / p.eligible.to_double()).abs() > 1.0e-12 {
+      continue
+    }
     match best {
       None => best = Some(p)
       Some(old) => {

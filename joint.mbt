@@ -31,7 +31,7 @@ pub fn recurrence_from_rows(
   }
   let n = rows.length()
   let m = rows[0].length()
-  if !cell_budget(n, m, 1048576) {
+  if n > 4096 || m > 4096 || !cell_budget(n, m, 1048576) {
     return Err(Limit("import matrix cell budget"))
   }
   let bits : Array[Bool] = []

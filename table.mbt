@@ -25,6 +25,10 @@ pub fn windows_csv(windows : Array[WindowSummary]) -> Result[String, RqaError] {
   let out = StringBuilder()
   out.write_string("start,stop,\{summary_header()}\n")
   for window in windows {
+    match window.summary.validate() {
+      Err(e) => return Err(e)
+      Ok(_) => ()
+    }
     if window.start < 0 || window.stop <= window.start || window.stop > 4096 {
       return Err(Invalid("window report positions"))
     }
@@ -45,6 +49,10 @@ pub fn thresholds_csv(
   let out = StringBuilder()
   out.write_string("threshold,\{summary_header()}\n")
   for row in scan {
+    match row.summary.validate() {
+      Err(e) => return Err(e)
+      Ok(_) => ()
+    }
     if !finite(row.threshold) || row.threshold < 0.0 {
       return Err(Invalid("threshold report value"))
     }
