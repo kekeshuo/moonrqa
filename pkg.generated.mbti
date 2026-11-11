@@ -24,6 +24,8 @@ pub fn lags_csv(Array[LagPoint]) -> Result[String, RqaError]
 
 pub fn recurrence(Trajectory, Double, Metric, Int32, Int32) -> Result[Recurrence, RqaError]
 
+pub fn recurrence_agreement(Recurrence, Recurrence) -> Result[Agreement, RqaError]
+
 pub fn recurrence_at_rate(Trajectory, Double, Metric, Int32, Int32) -> Result[RateSelection, RqaError]
 
 pub fn recurrence_from_rows(Array[Array[Int32]]) -> Result[Recurrence, RqaError]
@@ -38,6 +40,8 @@ pub fn trajectory_csv(String, Bool) -> Result[Trajectory, RqaError]
 
 pub fn trajectory_json(String) -> Result[Trajectory, RqaError]
 
+pub fn union_recurrence(Array[Recurrence]) -> Result[Recurrence, RqaError]
+
 pub fn window_rqa(Trajectory, Int32, Int32, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Array[WindowSummary], RqaError]
 
 pub fn windows_csv(Array[WindowSummary]) -> Result[String, RqaError]
@@ -45,6 +49,20 @@ pub fn windows_csv(Array[WindowSummary]) -> Result[String, RqaError]
 // Errors
 
 // Types and methods
+pub(all) struct Agreement {
+  both : Int32
+  only_first : Int32
+  only_second : Int32
+  neither : Int32
+  common_eligible : Int32
+  jaccard : Double?
+  first_given_second : Double?
+  second_given_first : Double?
+} derive(Eq, @debug.Debug)
+pub fn Agreement::equal(Self, Self) -> Bool
+pub fn Agreement::not_equal(Self, Self) -> Bool
+pub fn Agreement::to_repr(Self) -> @debug.Repr
+
 pub(all) struct BlockDensity {
   row_start : Int32
   column_start : Int32
