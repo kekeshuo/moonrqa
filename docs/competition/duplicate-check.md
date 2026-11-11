@@ -32,3 +32,9 @@ Moon search 上限100：psychrometric/psychrolib/humid/moist air/wetbulb/dew poi
 [pyunicorn recurrence_plot](https://github.com/pik-copan/pyunicorn/blob/master/src/pyunicorn/timeseries/recurrence_plot.py) BSD-3-Clause 为成熟行为基线，阅读定义和许可证，不复制实现或测试。论文 DOI:10.1016/j.physrep.2006.11.001。实现不是算法首创，也不是与 pyunicorn 全API兼容的移植。时间排除带和无结构时的零/None规则须显式定义并测试。源码访问 raw.github 失败后通过账号隔离GitHub只读API成功；没有关闭TLS或修改系统代理。
 
 MoonRecur 的日历规则、MoonBench 的性能统计、MoonConformal 的校准集合、MoonSeqMine 的频繁子序列均不属于本项目输入/模型/输出。选题已在排他锁下重新检查并原子预留。仅声明上述日期/版本/查询范围内未发现成熟直接替代；发布前再次反搜，不保证绝对唯一或官方验收。
+
+## 发布前复查（2026-11-11）
+
+再次执行 GitHub code search（per_page=100）：recurrence quantification、diagonal_histogram、laminarity、cross_recurrence、theiler，均限定 language:MoonBit，返回计数均为 0。再次运行 moon search --limit 100：recurrence quantification 返回 HOL Light 定理证明器；cross recurrence 返回 symbit、prove、moon-certified、loop_invariants_math、moonrand、snn_mbt，其描述分别为符号递推证明、形式验证、随机数与循环神经网络，不属于状态空间 RQA；Theiler、laminarity 无结果。没有将模糊检索或词语命中等同于重复项目。初查已阅读高度相邻 hrvkit 的源码与测试，并保留区别。检索不是穷尽，无法保证未索引项目不存在。
+
+完整功能现已通过三种本地可用运行后端、25 项单元／边界测试及独立穷举：21,297 个三值矩阵、63,891 份摘要和 384 个距离／阈值案例。选题比较的判断已由真实输入、输出和工作流兑现；平台发布结论另由外部验收报告记录。
