@@ -20,6 +20,8 @@ pub fn embed(Array[Double], Int32, Int32) -> Result[Trajectory, RqaError]
 
 pub fn joint_recurrence(Array[Recurrence]) -> Result[Recurrence, RqaError]
 
+pub fn lags_csv(Array[LagPoint]) -> Result[String, RqaError]
+
 pub fn recurrence(Trajectory, Double, Metric, Int32, Int32) -> Result[Recurrence, RqaError]
 
 pub fn recurrence_at_rate(Trajectory, Double, Metric, Int32, Int32) -> Result[RateSelection, RqaError]
@@ -28,6 +30,8 @@ pub fn recurrence_from_rows(Array[Array[Int32]]) -> Result[Recurrence, RqaError]
 
 pub fn threshold_scan(Trajectory, Array[Double], Metric, Int32, Int32, Int32, Int32) -> Result[Array[ThresholdSummary], RqaError]
 
+pub fn thresholds_csv(Array[ThresholdSummary]) -> Result[String, RqaError]
+
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 
 pub fn trajectory_csv(String, Bool) -> Result[Trajectory, RqaError]
@@ -35,6 +39,8 @@ pub fn trajectory_csv(String, Bool) -> Result[Trajectory, RqaError]
 pub fn trajectory_json(String) -> Result[Trajectory, RqaError]
 
 pub fn window_rqa(Trajectory, Int32, Int32, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Array[WindowSummary], RqaError]
+
+pub fn windows_csv(Array[WindowSummary]) -> Result[String, RqaError]
 
 // Errors
 
