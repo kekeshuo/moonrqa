@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn analysis_json(Trajectory, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Json, RqaError]
+
 pub fn best_lag(Array[LagPoint]) -> Int32?
 
 pub fn cross_recurrence(Trajectory, Trajectory, Double, Metric, Int32) -> Result[Recurrence, RqaError]
@@ -29,6 +31,8 @@ pub fn threshold_scan(Trajectory, Array[Double], Metric, Int32, Int32, Int32, In
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 
 pub fn trajectory_csv(String, Bool) -> Result[Trajectory, RqaError]
+
+pub fn trajectory_json(String) -> Result[Trajectory, RqaError]
 
 pub fn window_rqa(Trajectory, Int32, Int32, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Array[WindowSummary], RqaError]
 
@@ -98,6 +102,7 @@ pub fn Recurrence::rate(Self) -> Double?
 pub fn Recurrence::return_histogram(Self) -> Array[Int32]
 pub fn Recurrence::rows(Self) -> Array[Array[Int32]]
 pub fn Recurrence::shape(Self) -> (Int32, Int32)
+pub fn Recurrence::to_json(Self) -> Json
 pub fn Recurrence::to_repr(Self) -> @debug.Repr
 pub fn Recurrence::transpose(Self) -> Self
 pub fn Recurrence::vertical_histogram(Self) -> Array[Int32]
@@ -128,6 +133,7 @@ pub(all) struct RqaSummary {
 } derive(Eq, @debug.Debug)
 pub fn RqaSummary::equal(Self, Self) -> Bool
 pub fn RqaSummary::not_equal(Self, Self) -> Bool
+pub fn RqaSummary::to_json(Self) -> Json
 pub fn RqaSummary::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ThresholdSummary {
@@ -155,6 +161,7 @@ pub fn Trajectory::select_dimensions(Self, Array[Int32]) -> Result[Self, RqaErro
 pub fn Trajectory::slice(Self, Int32, Int32) -> Result[Self, RqaError]
 pub fn Trajectory::standardize(Self) -> Result[Self, RqaError]
 pub fn Trajectory::to_csv(Self) -> String
+pub fn Trajectory::to_json(Self) -> Json
 pub fn Trajectory::to_repr(Self) -> @debug.Repr
 
 pub(all) struct WindowSummary {
