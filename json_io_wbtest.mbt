@@ -16,3 +16,12 @@ test "JSON roundtrip null undefined values and report schema" {
     assert_true(trajectory_json(s) is Err(_))
   }
 }
+
+///|
+test "summary optionals serialize as scalar or null rather than tagged arrays" {
+  let q = recurrence_from_rows([[1]]).unwrap().quantify(1, 1).unwrap()
+  let json = q.to_json()
+  guard json is Json::Object(fields) else { abort("summary object") }
+  assert_eq(fields.get("recurrence_rate"), Some(Json::number(1.0)))
+  assert_eq(fields.get("mean_diagonal"), Some(Json::number(1.0)))
+}

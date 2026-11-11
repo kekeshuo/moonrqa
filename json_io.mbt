@@ -1,4 +1,12 @@
 ///|
+fn nullable_number(value : Double?) -> Json {
+  match value {
+    None => Json::null()
+    Some(x) => @json.to_json(x)
+  }
+}
+
+///|
 /// JSON trajectory interchange is a rectangular array of finite numeric arrays.
 pub fn trajectory_json(text : String) -> Result[Trajectory, RqaError] {
   if text.length() > 2097152 {
@@ -29,17 +37,17 @@ pub fn RqaSummary::to_json(self : RqaSummary) -> Json {
   Json::object({
     "recurrent": @json.to_json(self.recurrent),
     "eligible": @json.to_json(self.eligible),
-    "recurrence_rate": @json.to_json(self.recurrence_rate),
+    "recurrence_rate": nullable_number(self.recurrence_rate),
     "determinism": @json.to_json(self.determinism),
     "laminarity": @json.to_json(self.laminarity),
-    "mean_diagonal": @json.to_json(self.mean_diagonal),
+    "mean_diagonal": nullable_number(self.mean_diagonal),
     "longest_diagonal": @json.to_json(self.longest_diagonal),
-    "divergence": @json.to_json(self.divergence),
+    "divergence": nullable_number(self.divergence),
     "diagonal_entropy": @json.to_json(self.diagonal_entropy),
-    "trapping_time": @json.to_json(self.trapping_time),
+    "trapping_time": nullable_number(self.trapping_time),
     "longest_vertical": @json.to_json(self.longest_vertical),
     "vertical_entropy": @json.to_json(self.vertical_entropy),
-    "mean_return_gap": @json.to_json(self.mean_return_gap),
+    "mean_return_gap": nullable_number(self.mean_return_gap),
   })
 }
 

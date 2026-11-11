@@ -1,0 +1,6 @@
+import {
+  "kekeshuo/moonrqa" @rqa,
+  "moonbitlang/core/json",
+}
+
+pkgtype(kind: "executable")
