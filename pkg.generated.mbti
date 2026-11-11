@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "kekeshuo/moonrqa"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
+
+// Errors
+
+// Types and methods
+pub(all) enum Metric {
+  Chebyshev
+  Manhattan
+  Euclidean
+} derive(Eq, @debug.Debug)
+pub fn Metric::equal(Self, Self) -> Bool
+pub fn Metric::not_equal(Self, Self) -> Bool
+pub fn Metric::to_repr(Self) -> @debug.Repr
+
+pub(all) enum RqaError {
+  Invalid(String)
+  Limit(String)
+  Numeric(String)
+} derive(Eq, @debug.Debug)
+pub fn RqaError::equal(Self, Self) -> Bool
+pub fn RqaError::not_equal(Self, Self) -> Bool
+pub fn RqaError::to_repr(Self) -> @debug.Repr
+
+pub struct Trajectory {
+  samples : Int32
+  dimensions : Int32
+  values : Array[Double]
+} derive(Eq, @debug.Debug)
+pub fn Trajectory::dimension(Self) -> Int32
+pub fn Trajectory::equal(Self, Self) -> Bool
+pub fn Trajectory::len(Self) -> Int32
+pub fn Trajectory::not_equal(Self, Self) -> Bool
+pub fn Trajectory::point(Self, Int32) -> Result[Array[Double], RqaError]
+pub fn Trajectory::rows(Self) -> Array[Array[Double]]
+pub fn Trajectory::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits
