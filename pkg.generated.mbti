@@ -26,6 +26,8 @@ pub fn recurrence_from_rows(Array[Array[Int32]]) -> Result[Recurrence, RqaError]
 
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 
+pub fn window_rqa(Trajectory, Int32, Int32, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Array[WindowSummary], RqaError]
+
 // Errors
 
 // Types and methods
@@ -123,6 +125,15 @@ pub fn Trajectory::rows(Self) -> Array[Array[Double]]
 pub fn Trajectory::slice(Self, Int32, Int32) -> Result[Self, RqaError]
 pub fn Trajectory::standardize(Self) -> Result[Self, RqaError]
 pub fn Trajectory::to_repr(Self) -> @debug.Repr
+
+pub(all) struct WindowSummary {
+  start : Int32
+  stop : Int32
+  summary : RqaSummary
+} derive(Eq, @debug.Debug)
+pub fn WindowSummary::equal(Self, Self) -> Bool
+pub fn WindowSummary::not_equal(Self, Self) -> Bool
+pub fn WindowSummary::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
