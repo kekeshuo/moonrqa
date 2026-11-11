@@ -35,6 +35,8 @@ jobs:
       - run: moon test --target "${{ matrix.target }}" --deny-warn
       - name: Verify complete workflows and generated artifacts
         run: python scripts/verify_workflows.py --target "${{ matrix.target }}"
+      - name: Verify Chinese README code
+        run: moon run tools/readme --target "${{ matrix.target }}" --deny-warn
       - name: Independent exhaustive oracle
         run: python scripts/verify_oracle.py --target "${{ matrix.target }}"
       - if: matrix.target == 'wasm-gc'

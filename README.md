@@ -21,7 +21,6 @@ moon add kekeshuo/moonrqa@0.1.0
 ```moonbit
 import {
   "kekeshuo/moonrqa" @rqa,
-  "moonbitlang/core/json",
 }
 options("is-main": true)
 ```
