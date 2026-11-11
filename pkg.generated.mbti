@@ -126,12 +126,15 @@ pub struct Trajectory {
   dimensions : Int32
   values : Array[Double]
 } derive(Eq, @debug.Debug)
+pub fn Trajectory::decimate(Self, Int32, Int32) -> Result[Self, RqaError]
+pub fn Trajectory::detrend(Self) -> Result[Self, RqaError]
 pub fn Trajectory::dimension(Self) -> Int32
 pub fn Trajectory::equal(Self, Self) -> Bool
 pub fn Trajectory::len(Self) -> Int32
 pub fn Trajectory::not_equal(Self, Self) -> Bool
 pub fn Trajectory::point(Self, Int32) -> Result[Array[Double], RqaError]
 pub fn Trajectory::rows(Self) -> Array[Array[Double]]
+pub fn Trajectory::select_dimensions(Self, Array[Int32]) -> Result[Self, RqaError]
 pub fn Trajectory::slice(Self, Int32, Int32) -> Result[Self, RqaError]
 pub fn Trajectory::standardize(Self) -> Result[Self, RqaError]
 pub fn Trajectory::to_repr(Self) -> @debug.Repr
