@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn best_lag(Array[LagPoint]) -> Int32?
+
 pub fn cross_recurrence(Trajectory, Trajectory, Double, Metric, Int32) -> Result[Recurrence, RqaError]
 
 pub fn distance(Trajectory, Int32, Trajectory, Int32, Metric) -> Result[Double, RqaError]
@@ -27,6 +29,16 @@ pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 // Errors
 
 // Types and methods
+pub(all) struct LagPoint {
+  lag : Int32
+  recurrent : Int32
+  eligible : Int32
+  rate : Double?
+} derive(Eq, @debug.Debug)
+pub fn LagPoint::equal(Self, Self) -> Bool
+pub fn LagPoint::not_equal(Self, Self) -> Bool
+pub fn LagPoint::to_repr(Self) -> @debug.Repr
+
 pub(all) enum Metric {
   Chebyshev
   Manhattan
@@ -58,6 +70,7 @@ pub fn Recurrence::diagonal_histogram(Self) -> Array[Int32]
 pub fn Recurrence::equal(Self, Self) -> Bool
 pub fn Recurrence::exclude_band(Self, Int32) -> Result[Self, RqaError]
 pub fn Recurrence::horizontal_histogram(Self) -> Array[Int32]
+pub fn Recurrence::lag_profile(Self, Int32, Int32) -> Result[Array[LagPoint], RqaError]
 pub fn Recurrence::not_equal(Self, Self) -> Bool
 pub fn Recurrence::quantify(Self, Int32, Int32) -> Result[RqaSummary, RqaError]
 pub fn Recurrence::rate(Self) -> Double?
