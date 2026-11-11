@@ -28,6 +28,8 @@ pub fn threshold_scan(Trajectory, Array[Double], Metric, Int32, Int32, Int32, In
 
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 
+pub fn trajectory_csv(String, Bool) -> Result[Trajectory, RqaError]
+
 pub fn window_rqa(Trajectory, Int32, Int32, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Array[WindowSummary], RqaError]
 
 // Errors
@@ -152,6 +154,7 @@ pub fn Trajectory::rows(Self) -> Array[Array[Double]]
 pub fn Trajectory::select_dimensions(Self, Array[Int32]) -> Result[Self, RqaError]
 pub fn Trajectory::slice(Self, Int32, Int32) -> Result[Self, RqaError]
 pub fn Trajectory::standardize(Self) -> Result[Self, RqaError]
+pub fn Trajectory::to_csv(Self) -> String
 pub fn Trajectory::to_repr(Self) -> @debug.Repr
 
 pub(all) struct WindowSummary {
