@@ -6,6 +6,10 @@ import {
 }
 
 // Values
+pub fn distance(Trajectory, Int32, Trajectory, Int32, Metric) -> Result[Double, RqaError]
+
+pub fn distances(Trajectory, Trajectory, Metric, Int32) -> Result[Array[Array[Double]], RqaError]
+
 pub fn embed(Array[Double], Int32, Int32) -> Result[Trajectory, RqaError]
 
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
