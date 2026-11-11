@@ -24,6 +24,8 @@ pub fn recurrence_at_rate(Trajectory, Double, Metric, Int32, Int32) -> Result[Ra
 
 pub fn recurrence_from_rows(Array[Array[Int32]]) -> Result[Recurrence, RqaError]
 
+pub fn threshold_scan(Trajectory, Array[Double], Metric, Int32, Int32, Int32, Int32) -> Result[Array[ThresholdSummary], RqaError]
+
 pub fn trajectory(Array[Array[Double]]) -> Result[Trajectory, RqaError]
 
 pub fn window_rqa(Trajectory, Int32, Int32, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Array[WindowSummary], RqaError]
@@ -110,6 +112,14 @@ pub(all) struct RqaSummary {
 pub fn RqaSummary::equal(Self, Self) -> Bool
 pub fn RqaSummary::not_equal(Self, Self) -> Bool
 pub fn RqaSummary::to_repr(Self) -> @debug.Repr
+
+pub(all) struct ThresholdSummary {
+  threshold : Double
+  summary : RqaSummary
+} derive(Eq, @debug.Debug)
+pub fn ThresholdSummary::equal(Self, Self) -> Bool
+pub fn ThresholdSummary::not_equal(Self, Self) -> Bool
+pub fn ThresholdSummary::to_repr(Self) -> @debug.Repr
 
 pub struct Trajectory {
   samples : Int32
