@@ -1,10 +1,11 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct LagPoint {
   lag : Int32
   recurrent : Int32
   eligible : Int32
   rate : Double?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend LagPoint with @debug.Debug::{to_repr}

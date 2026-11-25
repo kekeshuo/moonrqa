@@ -3,10 +3,11 @@ package "kekeshuo/moonrqa"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }
 
 // Values
-pub fn analysis_json(Trajectory, Double, Metric, Int32, Int32, Int32, Int32) -> Result[Json, RqaError]
+pub fn analysis_json(Trajectory, Double, Metric, Int32, Int32, Int32, Int32) -> Result[@json.Json, RqaError]
 
 pub fn best_lag(Array[LagPoint]) -> Int32?
 
@@ -49,6 +50,7 @@ pub fn windows_csv(Array[WindowSummary]) -> Result[String, RqaError]
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) struct Agreement {
   both : Int32
   only_first : Int32
@@ -58,11 +60,12 @@ pub(all) struct Agreement {
   jaccard : Double?
   first_given_second : Double?
   second_given_first : Double?
-} derive(Eq, @debug.Debug)
+}
 pub fn Agreement::equal(Self, Self) -> Bool
 pub fn Agreement::not_equal(Self, Self) -> Bool
 pub fn Agreement::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct BlockDensity {
   row_start : Int32
   column_start : Int32
@@ -71,46 +74,50 @@ pub(all) struct BlockDensity {
   recurrent : Int32
   eligible : Int32
   rate : Double?
-} derive(Eq, @debug.Debug)
+}
 pub fn BlockDensity::equal(Self, Self) -> Bool
 pub fn BlockDensity::not_equal(Self, Self) -> Bool
 pub fn BlockDensity::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct LagPoint {
   lag : Int32
   recurrent : Int32
   eligible : Int32
   rate : Double?
-} derive(Eq, @debug.Debug)
+}
 pub fn LagPoint::equal(Self, Self) -> Bool
 pub fn LagPoint::not_equal(Self, Self) -> Bool
 pub fn LagPoint::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Metric {
   Chebyshev
   Manhattan
   Euclidean
-} derive(Eq, @debug.Debug)
+}
 pub fn Metric::equal(Self, Self) -> Bool
 pub fn Metric::not_equal(Self, Self) -> Bool
 pub fn Metric::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct RateSelection {
   threshold : Double
   achieved_rate : Double
   requested_rate : Double
   matrix : Recurrence
-} derive(Eq, @debug.Debug)
+}
 pub fn RateSelection::equal(Self, Self) -> Bool
 pub fn RateSelection::not_equal(Self, Self) -> Bool
 pub fn RateSelection::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub struct Recurrence {
   height : Int32
   width : Int32
   bits : Array[Bool]
   mask : Array[Bool]
-} derive(Eq, @debug.Debug)
+}
 pub fn Recurrence::block_densities(Self, Int32, Int32) -> Result[Array[BlockDensity], RqaError]
 pub fn Recurrence::cell(Self, Int32, Int32) -> Result[Bool?, RqaError]
 pub fn Recurrence::counts(Self) -> (Int32, Int32)
@@ -126,21 +133,23 @@ pub fn Recurrence::rate(Self) -> Double?
 pub fn Recurrence::return_histogram(Self) -> Array[Int32]
 pub fn Recurrence::rows(Self) -> Array[Array[Int32]]
 pub fn Recurrence::shape(Self) -> (Int32, Int32)
-pub fn Recurrence::to_json(Self) -> Json
+pub fn Recurrence::to_json(Self) -> @json.Json
 pub fn Recurrence::to_repr(Self) -> @debug.Repr
 pub fn Recurrence::to_svg(Self, Int32, String, Int32) -> Result[String, RqaError]
 pub fn Recurrence::transpose(Self) -> Self
 pub fn Recurrence::vertical_histogram(Self) -> Array[Int32]
 
+#derive(Eq, @debug.Debug)
 pub(all) enum RqaError {
   Invalid(String)
   Limit(String)
   Numeric(String)
-} derive(Eq, @debug.Debug)
+}
 pub fn RqaError::equal(Self, Self) -> Bool
 pub fn RqaError::not_equal(Self, Self) -> Bool
 pub fn RqaError::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct RqaSummary {
   recurrent : Int32
   eligible : Int32
@@ -155,26 +164,28 @@ pub(all) struct RqaSummary {
   longest_vertical : Int32
   vertical_entropy : Double
   mean_return_gap : Double?
-} derive(Eq, @debug.Debug)
+}
 pub fn RqaSummary::equal(Self, Self) -> Bool
 pub fn RqaSummary::not_equal(Self, Self) -> Bool
-pub fn RqaSummary::to_json(Self) -> Json
+pub fn RqaSummary::to_json(Self) -> @json.Json
 pub fn RqaSummary::to_repr(Self) -> @debug.Repr
 pub fn RqaSummary::validate(Self) -> Result[Unit, RqaError]
 
+#derive(Eq, @debug.Debug)
 pub(all) struct ThresholdSummary {
   threshold : Double
   summary : RqaSummary
-} derive(Eq, @debug.Debug)
+}
 pub fn ThresholdSummary::equal(Self, Self) -> Bool
 pub fn ThresholdSummary::not_equal(Self, Self) -> Bool
 pub fn ThresholdSummary::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub struct Trajectory {
   samples : Int32
   dimensions : Int32
   values : Array[Double]
-} derive(Eq, @debug.Debug)
+}
 pub fn Trajectory::decimate(Self, Int32, Int32) -> Result[Self, RqaError]
 pub fn Trajectory::detrend(Self) -> Result[Self, RqaError]
 pub fn Trajectory::dimension(Self) -> Int32
@@ -187,14 +198,15 @@ pub fn Trajectory::select_dimensions(Self, Array[Int32]) -> Result[Self, RqaErro
 pub fn Trajectory::slice(Self, Int32, Int32) -> Result[Self, RqaError]
 pub fn Trajectory::standardize(Self) -> Result[Self, RqaError]
 pub fn Trajectory::to_csv(Self) -> String
-pub fn Trajectory::to_json(Self) -> Json
+pub fn Trajectory::to_json(Self) -> @json.Json
 pub fn Trajectory::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct WindowSummary {
   start : Int32
   stop : Int32
   summary : RqaSummary
-} derive(Eq, @debug.Debug)
+}
 pub fn WindowSummary::equal(Self, Self) -> Bool
 pub fn WindowSummary::not_equal(Self, Self) -> Bool
 pub fn WindowSummary::to_repr(Self) -> @debug.Repr

@@ -1,4 +1,5 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct Agreement {
   both : Int32
   only_first : Int32
@@ -8,7 +9,7 @@ pub(all) struct Agreement {
   jaccard : Double?
   first_given_second : Double?
   second_given_first : Double?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Agreement with @debug.Debug::{to_repr}

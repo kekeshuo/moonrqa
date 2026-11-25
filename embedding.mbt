@@ -58,18 +58,25 @@ pub fn Trajectory::standardize(
 ) -> Result[Trajectory, RqaError] {
   let output = self.values.copy()
   for k in 0..<self.dimensions {
-    let mut mean = 0.0
-    for i in 0..<self.samples {
-      mean += self.values[i * self.dimensions + k] / self.samples.to_double()
-    }
+    // Center first, then scale deltas to preserve subnormals and close large
+    // coordinates without overflowing or erasing their variation.
+    let anchor = self.values[k]
     let mut scale = 0.0
     for i in 0..<self.samples {
-      scale = scale.max((self.values[i * self.dimensions + k] - mean).abs())
+      scale = scale.max((self.values[i * self.dimensions + k] - anchor).abs())
+    }
+    let mut mean = 0.0
+    if scale > 0.0 {
+      for i in 0..<self.samples {
+        mean += (self.values[i * self.dimensions + k] - anchor) /
+          scale /
+          self.samples.to_double()
+      }
     }
     let mut variance = 0.0
     if scale > 0.0 {
       for i in 0..<self.samples {
-        let x = (self.values[i * self.dimensions + k] - mean) / scale
+        let x = (self.values[i * self.dimensions + k] - anchor) / scale - mean
         variance += x * x / self.samples.to_double()
       }
     }
@@ -78,7 +85,7 @@ pub fn Trajectory::standardize(
       output[i * self.dimensions + k] = if scale == 0.0 {
         0.0
       } else {
-        (self.values[i * self.dimensions + k] - mean) / scale / sd
+        ((self.values[i * self.dimensions + k] - anchor) / scale - mean) / sd
       }
     }
   }

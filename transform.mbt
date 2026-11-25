@@ -55,6 +55,19 @@ pub fn Trajectory::detrend(self : Trajectory) -> Result[Trajectory, RqaError] {
     xx += x * x
   }
   for k in 0..<self.dimensions {
+    let anchor = self.values[k]
+    let mut magnitude = 0.0
+    for i in 0..<self.samples {
+      magnitude = magnitude.max(
+        (self.values[i * self.dimensions + k] - anchor).abs(),
+      )
+    }
+    if magnitude == 0.0 {
+      for i in 0..<self.samples {
+        output[i * self.dimensions + k] = 0.0
+      }
+      continue
+    }
     let mut mean = 0.0
     for i in 0..<self.samples {
       mean += self.values[i * self.dimensions + k] / self.samples.to_double()

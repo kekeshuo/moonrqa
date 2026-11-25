@@ -1,9 +1,10 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct WindowSummary {
   start : Int32
   stop : Int32
   summary : RqaSummary
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend WindowSummary with @debug.Debug::{to_repr}

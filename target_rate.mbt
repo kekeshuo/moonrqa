@@ -1,10 +1,11 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct RateSelection {
   threshold : Double
   achieved_rate : Double
   requested_rate : Double
   matrix : Recurrence
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RateSelection with @debug.Debug::{to_repr}

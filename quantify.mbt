@@ -28,6 +28,7 @@ fn histogram_longest(histogram : Array[Int32], minimum : Int32) -> Int32 {
 }
 
 ///|
+#derive(Debug, Eq)
 pub(all) struct RqaSummary {
   recurrent : Int32
   eligible : Int32
@@ -42,7 +43,7 @@ pub(all) struct RqaSummary {
   longest_vertical : Int32
   vertical_entropy : Double
   mean_return_gap : Double?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend RqaSummary with @debug.Debug::{to_repr}

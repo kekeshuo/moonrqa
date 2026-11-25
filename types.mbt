@@ -1,18 +1,20 @@
 ///|
 /// Typed, deterministic failures. No partial results are returned.
+#derive(Debug, Eq)
 pub(all) enum RqaError {
   Invalid(String)
   Limit(String)
   Numeric(String)
-} derive(Debug, Eq)
+}
 
 ///|
 /// Distance between finite state vectors.
+#derive(Debug, Eq)
 pub(all) enum Metric {
   Chebyshev
   Manhattan
   Euclidean
-} derive(Debug, Eq)
+}
 
 ///|
 /// Hard implementation ceilings; caller budgets can only tighten them.
@@ -27,11 +29,12 @@ fn valid_number(x : Double) -> Bool {
 
 ///|
 /// Owns a row-major snapshot; mutation of inputs cannot change analysis.
+#derive(Debug, Eq)
 pub struct Trajectory {
   samples : Int32
   dimensions : Int32
   values : Array[Double]
-} derive(Debug, Eq)
+}
 
 ///|
 pub fn trajectory(rows : Array[Array[Double]]) -> Result[Trajectory, RqaError] {

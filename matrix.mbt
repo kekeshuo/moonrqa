@@ -1,11 +1,12 @@
 ///|
 /// Missing/excluded cells are distinct from nonrecurrent eligible cells.
+#derive(Debug, Eq)
 pub struct Recurrence {
   height : Int32
   width : Int32
   bits : Array[Bool]
   mask : Array[Bool]
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend Recurrence with @debug.Debug::{to_repr}

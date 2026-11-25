@@ -1,8 +1,9 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct ThresholdSummary {
   threshold : Double
   summary : RqaSummary
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend ThresholdSummary with @debug.Debug::{to_repr}

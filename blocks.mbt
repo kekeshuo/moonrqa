@@ -1,4 +1,5 @@
 ///|
+#derive(Debug, Eq)
 pub(all) struct BlockDensity {
   row_start : Int32
   column_start : Int32
@@ -7,7 +8,7 @@ pub(all) struct BlockDensity {
   recurrent : Int32
   eligible : Int32
   rate : Double?
-} derive(Debug, Eq)
+}
 
 ///|
 pub extend BlockDensity with @debug.Debug::{to_repr}
