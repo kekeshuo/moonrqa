@@ -37,6 +37,8 @@ jobs:
       - run: moon check --target "${{ matrix.target }}" --deny-warn
       - run: moon build --target "${{ matrix.target }}" --deny-warn
       - run: moon test --target "${{ matrix.target }}" --deny-warn
+      - name: Verify release documentation version
+        run: python scripts/verify_release_docs.py
       - name: Verify complete workflows and generated artifacts
         run: python scripts/verify_workflows.py --target "${{ matrix.target }}"
       - name: Verify Chinese README code

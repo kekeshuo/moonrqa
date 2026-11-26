@@ -1,5 +1,10 @@
 # 版本记录
 
+## 0.1.3 — 2026-11-26
+
+- 修复中文 README 安装命令仍指定旧版的问题，使版本说明、安装命令与模块版本一致。
+- 增加 CI 文档版本检查；工具链与库 API 保持不变。
+
 ## 0.1.2 — 2026-11-26
 
 - CI now asserts exact versions for `moon 0.1.20261119`, `moonc 0.10.22+124d61d05`, and `moonrun 0.1.20261119` on every target.
