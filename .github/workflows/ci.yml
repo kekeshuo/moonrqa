@@ -27,9 +27,13 @@ jobs:
           bash /tmp/moon-install.sh "$MOONBIT_INSTALL_VERSION"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Verify toolchain
+        shell: bash
         run: |
-          moon version --all
-          moonc -v | grep -F 'v0.10.22+124d61d05'
+          toolchain="$(moon version --all)"
+          printf '%s\n' "$toolchain"
+          printf '%s\n' "$toolchain" | grep -Eq '^moon 0\.1\.20261119 \('
+          printf '%s\n' "$toolchain" | grep -Eq '^moonc v0\.10\.22\+124d61d05 \('
+          printf '%s\n' "$toolchain" | grep -Eq '^moonrun 0\.1\.20261119 \('
       - run: moon check --target "${{ matrix.target }}" --deny-warn
       - run: moon build --target "${{ matrix.target }}" --deny-warn
       - run: moon test --target "${{ matrix.target }}" --deny-warn
