@@ -6,7 +6,7 @@ MoonRQA 将有限时间序列或多维状态轨迹转换为递归矩阵，计算
 
 ## 安装与环境
 
-版本 `0.1.1`（次正规数数值修复与 MoonBit 0.10.22 严格构建兼容版），模块 `kekeshuo/moonrqa`，MIT 许可。项目固定验证 MoonBit 工具链：`moon 0.1.20261119`、`moonc 0.10.22+124d61d05`、`moonrun 0.1.20261119`（moonc 不低于比赛要求的 `0.10.16`）。GitHub CI 对三个版本均执行精确断言。生产库只依赖该工具链的官方 core。CI 在 Ubuntu 24.04 分别检查、构建、测试并运行 wasm-gc、wasm、js、native；JS 需要 Node.js 22，native 需要平台 C 编译器。Windows 没有 C 编译器时仍可使用前三种目标。
+版本 `0.1.2`（完整 MoonBit 工具链精确验证版；不含库 API 变更），模块 `kekeshuo/moonrqa`，MIT 许可。项目固定验证 MoonBit 工具链：`moon 0.1.20261119`、`moonc 0.10.22+124d61d05`、`moonrun 0.1.20261119`（moonc 不低于比赛要求的 `0.10.16`）。GitHub CI 对三个版本均执行精确断言。MoonCakes 的公开包清单不提供服务端编译器版本，因此这里声明的是项目 CI 的验证工具链，不代表 MoonCakes 服务端实际版本。生产库只依赖该工具链的官方 core。CI 在 Ubuntu 24.04 分别检查、构建、测试并运行 wasm-gc、wasm、js、native；JS 需要 Node.js 22，native 需要平台 C 编译器。Windows 没有 C 编译器时仍可使用前三种目标。
 
 在一个空目录初始化消费者，安装精确版本：
 

@@ -1,5 +1,11 @@
 # 版本记录
 
+## 0.1.2 — 2026-11-26
+
+- CI now asserts exact versions for `moon 0.1.20261119`, `moonc 0.10.22+124d61d05`, and `moonrun 0.1.20261119` on every target.
+- Clarified that these are the project CI toolchain versions; the MoonCakes public manifest does not expose the server-side compiler version.
+- No library API or algorithm changes.
+
 ## 0.1.1 — 2026-11-25
 
 - Fixed population standardization underflow for minimum subnormal Double values and constant coordinates; detrending now zeros constant subnormal coordinates.
