@@ -5,7 +5,13 @@ fn xml_text(text : String) -> Result[String, RqaError] {
   }
   let out = StringBuilder()
   for ch in text.iter() {
-    if ch.to_int() < 32 && ch != '\n' && ch != '\r' && ch != '\t' {
+    let code = ch.to_int()
+    if !(code == 9 ||
+      code == 10 ||
+      code == 13 ||
+      (code >= 0x20 && code <= 0xD7FF) ||
+      (code >= 0xE000 && code <= 0xFFFD) ||
+      (code >= 0x10000 && code <= 0x10FFFF)) {
       return Err(Invalid("SVG XML control character"))
     }
     match ch {

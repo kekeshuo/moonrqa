@@ -68,20 +68,31 @@ pub fn Trajectory::detrend(self : Trajectory) -> Result[Trajectory, RqaError] {
       }
       continue
     }
+    // Fit in centered, scaled coordinates: dividing raw subnormal values
+    // before centering can erase the mean and leave a spurious residual.
+    // A power-of-two scale avoids extra rounding of exactly linear data.
+    // Clamp subnormal exponents to the smallest normal scale.
+    let exponent = ((magnitude.reinterpret_as_uint64() >> 52).to_int() - 1023).max(
+      -1022,
+    )
+    let scale = @math.scalbn(1.0, exponent)
     let mut mean = 0.0
     for i in 0..<self.samples {
-      mean += self.values[i * self.dimensions + k] / self.samples.to_double()
+      mean += (self.values[i * self.dimensions + k] - anchor) /
+        scale /
+        self.samples.to_double()
     }
     let mut xy = 0.0
     for i in 0..<self.samples {
-      xy += (i.to_double() - center) *
-        (self.values[i * self.dimensions + k] - mean)
+      let centered = (self.values[i * self.dimensions + k] - anchor) / scale -
+        mean
+      xy += (i.to_double() - center) * centered
     }
     let slope = if xx == 0.0 { 0.0 } else { xy / xx }
     for i in 0..<self.samples {
-      let value = self.values[i * self.dimensions + k] -
-        mean -
-        slope * (i.to_double() - center)
+      let centered = (self.values[i * self.dimensions + k] - anchor) / scale -
+        mean
+      let value = (centered - slope * (i.to_double() - center)) * scale
       if !valid_number(value) {
         return Err(Numeric("detrending exceeds coordinate range"))
       }

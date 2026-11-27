@@ -38,3 +38,12 @@ MoonRecur 的日历规则、MoonBench 的性能统计、MoonConformal 的校准�
 再次执行 GitHub code search（per_page=100）：recurrence quantification、diagonal_histogram、laminarity、cross_recurrence、theiler，均限定 language:MoonBit，返回计数均为 0。再次运行 moon search --limit 100：recurrence quantification 返回 HOL Light 定理证明器；cross recurrence 返回 symbit、prove、moon-certified、loop_invariants_math、moonrand、snn_mbt，其描述分别为符号递推证明、形式验证、随机数与循环神经网络，不属于状态空间 RQA；Theiler、laminarity 无结果。没有将模糊检索或词语命中等同于重复项目。初查已阅读高度相邻 hrvkit 的源码与测试，并保留区别。检索不是穷尽，无法保证未索引项目不存在。
 
 完整功能现已通过三种本地可用运行后端、25 项单元／边界测试及独立穷举：21,297 个三值矩阵、63,891 份摘要和 384 个距离／阈值案例。选题比较的判断已由真实输入、输出和工作流兑现；平台发布结论另由外部验收报告记录。
+
+
+## 2026-11-27 修复交付前复核
+
+本次是既有 MoonRQA 数值/SVG 边界修复，不更换原选题。重新执行 `moon search`（各 `--limit 100`）：recurrence quantification、recurrence plot、Theiler、laminarity、pyunicorn、cross_recurrence、lag_profile；每组返回 0–6 项，未触及上限。GitHub MoonBit code 检索 recurrence quantification / Theiler / cross_recurrence 返回 0，索引有收录限制，不将零命中视为唯一性证明。
+
+重新读取 hrvkit 的 nonlinear.mbt / nonlinear_test.mbt、time-series-forecasting 的 diagnostics.mbt / diagnostics_test.mbt、symbit 的 src/symdiscrete/recurrences.mbt；仍分别为单变量心率递归比例、预测诊断、符号递推，不替代多维三值掩码、线直方图与交叉/联合RQA工作流。新增关键词邻近结果 [moonbit-ocean-qc](https://github.com/lwq443/moonbit-ocean-qc) 与 [moon-missingness](https://github.com/liuminyuan/moon-missingness) 的 README / 源树分别是海洋质量控制、缺失值诊断插补，不是本项目核心任务。永久注册表 MoonRQA / MoonRecur 等指纹复查：日历规则展开与状态空间递归不属同一问题。
+
+raw GitHub 读取连接被重置后使用官方 contents/tree API 核对真实源码；一个 MoonCakes 邻近包元数据读取超时，源码/测试通过 GitHub 核验。有限记录范围内未确认成熟、维护良好的直接替代；不声称穷尽生态、数学方法原创或获得官方查重认可。
